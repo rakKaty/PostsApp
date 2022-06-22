@@ -2,11 +2,16 @@ package ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.annotation.DrawableRes
+import ru.netology.nmedia.ViewModel.PostViewModel
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.databinding.PostBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel by viewModels<PostViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -14,25 +19,28 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val post = Post(
-            id = 0L,
-            author = "Katya",
-            content = "Events",
-            published = "16.06.2022",
-            )
+        viewModel.data.observe(this) { post ->
+            binding.render(post)
+        }
 
-        binding.render(post)
+
 
         binding.includePost.likesIcon.setOnClickListener {
+            viewModel.onLikeClicked()
+        }
+        /*binding.includePost.likesIcon.setOnClickListener {
             post.likedByMe = !post.likedByMe
             binding.includePost.likesIcon.setImageResource(getLikeIconResId(post.likedByMe))
-            binding.includePost.amountOfLikes.text = getAmountOfLikesResId(post)
-        }
+            binding.includePost.amountOfLikes.text = changeFormatOfNumberToText(getAmountOfLikes(post))
+        }*/
 
-        binding.includePost.shareIcon.setOnClickListener {
+       binding.includePost.shareIcon.setOnClickListener {
+           viewModel.onShareClicked()
+        }
+        /*binding.includePost.shareIcon.setOnClickListener {
             post.shares += 1
             binding.includePost.amountOfShares.text = changeFormatOfNumberToText(post.shares)
-        }
+        } */
     }
 
     private fun ActivityMainBinding.render(post: Post) {
@@ -40,15 +48,13 @@ class MainActivity : AppCompatActivity() {
         includePost.postText.text = post.content
         includePost.date.text = post.published
         includePost.likesIcon.setImageResource(getLikeIconResId(post.likedByMe))
-        includePost.amountOfLikes.text = getAmountOfLikesResId(post)
+        includePost.amountOfLikes.text = changeFormatOfNumberToText(getAmountOfLikes(post))
         includePost.amountOfShares.text = changeFormatOfNumberToText(post.shares)
     }
 
 
-    private fun getAmountOfLikesResId(post: Post) =
-        (if (post.likedByMe) {
-            post.likes + 1
-        } else post.likes).toString()
+    private fun getAmountOfLikes(post: Post) =
+        if (post.likedByMe) { post.likes + 1 } else post.likes
 
 
     private fun changeFormatOfNumberToText(number: Int): String = when {
