@@ -6,36 +6,36 @@ import ru.netology.nmedia.Post
 import ru.netology.nmedia.data.PostRepository
 
 class InMemoryPostRepository : PostRepository {
+
     override val data = MutableLiveData(
-        Post(
-            id = 0L,
-            author = "Katya",
-            content = "Events",
-            published = "16.06.2022",
-            likedByMe = false
-        )
+        List(10) { index ->
+            Post(
+                id = index + 1L,
+                author = "Netology",
+                content = "Some random content ${index + 1}",
+                published = "23.06.2022",
+                likedByMe = false
+            )
+        }
     )
 
-    override fun like() {
-        val currentPost = checkNotNull(data.value){
+    private val posts
+        get() = checkNotNull(data.value) {
             "Data value should not be null!"
         }
-        val likedPost = currentPost.copy(
-            likedByMe = !currentPost.likedByMe
-        )
 
-        data.value = likedPost
+    override fun like(postId: Long) {
+        data.value = posts.map {
+            if (it.id == postId) it.copy(likedByMe = !it.likedByMe)
+            else it
+        }
     }
 
 
-    override fun share() {
-        val currentPost = checkNotNull(data.value){
-            "Data value should not be null!"
+    override fun share(postId: Long) {
+        data.value = posts.map {
+            if (it.id == postId) it.copy(shares = it.shares + 1)
+            else it
         }
-        val sharedPost = currentPost.copy(
-            shares = currentPost.shares + 1
-        )
-
-        data.value = sharedPost
     }
 }
