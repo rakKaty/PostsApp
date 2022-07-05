@@ -42,5 +42,9 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     override fun onEditClicked(post: Post) {
         currentPost.value = post //показывает в поле набора текста - текст этого поста
     }
+    override fun onCancelEditClicked() {
+        currentPost.value = null
+    }
+
     //endregion
 }
