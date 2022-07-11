@@ -47,6 +47,7 @@ internal class PostsAdapter(
         init {
             binding.likesIcon.setOnClickListener { listener.onLikeClicked(post) }
             binding.shareIcon.setOnClickListener { listener.onShareClicked(post) }
+            binding.options.setOnClickListener { popupMenu.show() }
         }
 
 
@@ -57,10 +58,10 @@ internal class PostsAdapter(
                 authorName.text = post.author
                 postText.text = post.content
                 date.text = post.published
-                likesIcon.setImageResource(getLikeIconResId(post.likedByMe))
-                amountOfLikes.text = changeFormatOfNumberToText(getAmountOfLikes(post))
-                options.setOnClickListener { popupMenu.show() }
-                amountOfShares.text = changeFormatOfNumberToText(post.shares)
+                likesIcon.isChecked = post.likedByMe
+                //likesIcon.setButtonDrawable(getLikeIconResId(post.likedByMe))
+                likesIcon.text = changeFormatOfNumberToText(getAmountOfLikes(post))
+                shareIcon.text = changeFormatOfNumberToText(post.shares)
             }
         }
 
@@ -79,9 +80,9 @@ internal class PostsAdapter(
         }
 
 
-        @DrawableRes
+       /* @DrawableRes
         private fun getLikeIconResId(liked: Boolean) =
-            if (liked) R.drawable.ic_liked_24dp else R.drawable.ic_like_24dp
+            if (liked) R.drawable.ic_liked_24dp else R.drawable.ic_like_24dp*/
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
