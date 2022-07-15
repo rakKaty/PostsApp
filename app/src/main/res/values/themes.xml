@@ -29,7 +29,12 @@
         <item name="minHeight">@dimen/icon_button_min_size</item>
     </style>
 
-    <style name="Widget.AppTheme.OptionsIcon" parent="Widget.AppCompat.CompoundButton.CheckBox">
+    <style name="Widget.AppTheme.OptionsIcon" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
         <item name="iconTint">@color/options_checkbox_tint</item>
         <item name="minWidth">@dimen/icon_button_min_size</item>
         <item name="minHeight">@dimen/icon_button_min_size</item>
