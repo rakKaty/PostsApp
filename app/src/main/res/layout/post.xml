@@ -78,6 +78,32 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="postText" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/videoBanner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/screen_shot"
+        app:layout_constraintBottom_toBottomOf="@id/bottomBarrier"
+        app:layout_constraintTop_toBottomOf="@id/postText" />
+
+    <View
+        android:id="@+id/playVideoButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@android:drawable/ic_media_play"
+        app:layout_constraintBottom_toBottomOf="@id/videoBanner"
+        app:layout_constraintEnd_toEndOf="@id/videoBanner"
+        app:layout_constraintStart_toStartOf="@id/videoBanner"
+        app:layout_constraintTop_toTopOf="@id/videoBanner" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/videoGroup"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:constraint_referenced_ids="videoBanner, playVideoButton"
+        tools:visibility="visible" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/likesIcon"

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.annotation.DrawableRes
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -47,6 +48,7 @@ internal class PostsAdapter(
         init {
             binding.likesIcon.setOnClickListener { listener.onLikeClicked(post) }
             binding.shareIcon.setOnClickListener { listener.onShareClicked(post) }
+            binding.videoBanner.setOnClickListener { listener.onPlayVideoClicked(post) }
             binding.options.setOnClickListener { popupMenu.show() }
         }
 
@@ -59,9 +61,9 @@ internal class PostsAdapter(
                 postText.text = post.content
                 date.text = post.published
                 likesIcon.isChecked = post.likedByMe
-                //likesIcon.setButtonDrawable(getLikeIconResId(post.likedByMe))
                 likesIcon.text = changeFormatOfNumberToText(getAmountOfLikes(post))
                 shareIcon.text = changeFormatOfNumberToText(post.shares)
+                videoGroup.isVisible = post.video != null
             }
         }
 
@@ -80,9 +82,6 @@ internal class PostsAdapter(
         }
 
 
-       /* @DrawableRes
-        private fun getLikeIconResId(liked: Boolean) =
-            if (liked) R.drawable.ic_liked_24dp else R.drawable.ic_like_24dp*/
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

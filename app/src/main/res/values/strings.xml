@@ -8,4 +8,6 @@
     <string name="menu_edit">Edit</string>
     <string name="edit_message">Edit Message</string>
     <string name="netology">Netology</string>
+    <string name="chooser_share_post">Share post</string>
+
 </resources>
