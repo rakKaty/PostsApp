@@ -1,4 +1,4 @@
-package ru.netology.nmedia.data.Impl
+package ru.netology.nmedia.data.impl
 
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.Post

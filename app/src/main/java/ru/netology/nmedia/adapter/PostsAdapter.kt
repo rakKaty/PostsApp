@@ -3,7 +3,6 @@ package ru.netology.nmedia.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.annotation.DrawableRes
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostBinding
-import kotlin.properties.Delegates
 
 
 internal class PostsAdapter(
@@ -30,7 +28,7 @@ internal class PostsAdapter(
             PopupMenu(itemView.context, binding.options).apply {
                 inflate(R.menu.options_post)
                 setOnMenuItemClickListener { menuItem ->
-                    when(menuItem.itemId) {
+                    when (menuItem.itemId) {
                         R.id.remove -> {
                             listener.onRemoveClicked(post)
                             true
@@ -53,7 +51,7 @@ internal class PostsAdapter(
         }
 
 
-        fun bind(post: Post): Unit {
+        fun bind(post: Post) {
             this.post = post
 
             with(binding) {
@@ -74,10 +72,10 @@ internal class PostsAdapter(
 
 
         private fun changeFormatOfNumberToText(number: Int): String = when {
-            number < 1000 -> "$number";
+            number < 1000 -> "$number"
             number in 1000..9999 -> "${number / 1000}.${(number % 1000) / 100}K"
-            number in 10_000..999_999 -> "${number / 1000}K";
-            number in 1_000_000..9_999_999 -> "${number / 1_000_000}.${(number % 1_000_000) / 100}M";
+            number in 10_000..999_999 -> "${number / 1000}K"
+            number in 1_000_000..9_999_999 -> "${number / 1_000_000}.${(number % 1_000_000) / 100}M"
             else -> "${number / 1_000_000}M"
         }
 

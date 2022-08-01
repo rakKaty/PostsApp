@@ -3,7 +3,6 @@ package ru.netology.nmedia.activity
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.icu.number.NumberFormatter
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
