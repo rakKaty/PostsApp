@@ -1,5 +1,8 @@
 package ru.netology.nmedia
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Post(
     val id: Long,
     val author: String,
@@ -9,5 +12,4 @@ data class Post(
     val likedByMe: Boolean = false,
     var shares: Int = 999,
     val video: String? = "https://www.youtube.com/watch?v=boO-OdBnTic"
-
 )

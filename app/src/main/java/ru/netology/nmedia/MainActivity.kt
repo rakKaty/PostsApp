@@ -4,19 +4,12 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
-import androidx.annotation.DrawableRes
-import androidx.lifecycle.ViewModel
-import com.google.android.material.snackbar.Snackbar
-import ru.netology.nmedia.ViewModel.PostViewModel
+import ru.netology.nmedia.viewModel.PostViewModel
 import ru.netology.nmedia.activity.NewPostActivity
 import ru.netology.nmedia.adapter.PostsAdapter
 
 import ru.netology.nmedia.databinding.ActivityMainBinding
-
-import ru.netology.nmedia.databinding.PostBinding
-import ru.netology.nmedia.util.hideKeyboard
 
 class MainActivity : AppCompatActivity() {
 

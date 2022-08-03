@@ -2,12 +2,8 @@ package ru.netology.nmedia.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import ru.netology.nmedia.ViewModel.PostViewModel
 import ru.netology.nmedia.databinding.IntentHandlerActivityBinding
 
 class IntentHandlerActivity : AppCompatActivity() {
