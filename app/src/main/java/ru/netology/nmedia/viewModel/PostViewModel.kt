@@ -20,13 +20,13 @@ class PostViewModel(
     //val data get() = repository.data  - тоже самое
 
     val sharePostContent = SingleLiveEvent<Post>()
-    val navigateToPostContentScreenEvent = SingleLiveEvent<String?>()
+    val navigateToPostContentScreen = SingleLiveEvent<String?>()
+    val navigateToPostScreen = SingleLiveEvent<Long>()
 
     /**
      * Значение события содержит url видео для воспроизведения
      */
     val playVideo = SingleLiveEvent<String>()
-
 
     private val currentPost = MutableLiveData<Post?>(null)
 
@@ -59,7 +59,7 @@ class PostViewModel(
 
     override fun onEditClicked(post: Post) {
         currentPost.value = post // закидываем пост в поток
-        navigateToPostContentScreenEvent.value =
+        navigateToPostContentScreen.value =
             post.content // отобразится контент текущего поста на экране
     }
 
@@ -68,6 +68,14 @@ class PostViewModel(
             "Url is null"
         }
         playVideo.value = url
+    }
+
+    override fun onPostClicked(id: Long) {
+        val post = currentPost.value
+        if (post != null) {
+            navigateToPostScreen.value =
+                post.id
+        }
     }
 
     //endregion
