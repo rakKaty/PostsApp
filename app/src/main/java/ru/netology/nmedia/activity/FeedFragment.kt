@@ -65,10 +65,11 @@ class FeedFragment : Fragment() {
             )
         }
 
-        viewModel.navigateToPostScreen.observe(viewLifecycleOwner) { id ->
+        viewModel.navigateToPostScreen.observe(viewLifecycleOwner) { postId ->
             findNavController().navigate(R.id.action_feedFragment_to_postFragment,
-                Bundle().apply { idArg = id })
+                Bundle().apply { idArg = postId })
         }
+
 
 
         return binding.root

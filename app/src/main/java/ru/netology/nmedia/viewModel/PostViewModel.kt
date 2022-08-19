@@ -45,8 +45,6 @@ class PostViewModel(
     }
 
 
-
-
     //region PostInteractionListener
     override fun onLikeClicked(post: Post) = repository.like(post.id)
 
@@ -71,11 +69,7 @@ class PostViewModel(
     }
 
     override fun onPostClicked(id: Long) {
-        val post = currentPost.value
-        if (post != null) {
-            navigateToPostScreen.value =
-                post.id
-        }
+        navigateToPostScreen.value = id
     }
 
     //endregion
