@@ -34,6 +34,8 @@ class AppActivity : AppCompatActivity() {
         val intent = intent ?: return
         if (intent.action != Intent.ACTION_SEND) return
 
+        val postId = intent.getLongExtra(Intent.EXTRA_TEXT, 0L)
+
         val text = intent.getStringExtra(Intent.EXTRA_TEXT)
         if (text.isNullOrBlank()) {
 
@@ -55,11 +57,13 @@ class AppActivity : AppCompatActivity() {
         )
 
 
-      /* fragment.navController.navigate(
+      fragment.navController.navigate(
             R.id.action_feedFragment_to_postFragment,
-            Bundle().apply { idArg = id } тут непонятно откуда брать id
-        ) */
+            Bundle().apply { idArg = postId }
+        )
     }
 }
+
+
 
 

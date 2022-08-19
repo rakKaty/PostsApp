@@ -104,14 +104,6 @@
         app:constraint_referenced_ids="videoBanner, playVideoButton"
         tools:visibility="visible" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/postGroup"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:constraint_referenced_ids="postText, bottomBarrier, videoGroup"
-        tools:visibility="visible" />
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/likesIcon"
