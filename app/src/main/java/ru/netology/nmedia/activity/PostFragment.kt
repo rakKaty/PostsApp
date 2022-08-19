@@ -33,12 +33,6 @@ class PostFragment : Fragment() {
         val viewHolder = PostsAdapter.PostViewHolder(binding.postLayout, viewModel)
 
 
-
-        viewModel.data.observe(viewLifecycleOwner) {    List ->
-            List.find { it.id == arguments?.idArg }?.let { viewHolder.bind(it) }
-        }
-
-
         viewModel.sharePostContent.observe(viewLifecycleOwner) { post ->
             val intent = Intent().apply {
                 action = Intent.ACTION_SEND
@@ -56,7 +50,25 @@ class PostFragment : Fragment() {
             startActivity(intent)
         }
 
+        viewModel.navigateToPostContentScreen.observe(viewLifecycleOwner) { text ->
+            findNavController().navigate(
+                R.id.action_postFragment_to_newPostFragment,
+                Bundle().apply { textArg = text }
+            )
+        }
         
+
+        viewModel.data.observe(viewLifecycleOwner) { list ->
+            val post = list.find { it.id == arguments?.idArg }
+            if (list.contains(post)){
+                if (post != null) {
+                    viewHolder.bind(post)
+                }
+            } else {
+                findNavController()
+                    .navigateUp()
+            }
+        }
 
         return binding.root
     }
