@@ -14,10 +14,10 @@ import ru.netology.nmedia.databinding.PostBinding
 
 internal class PostsAdapter(
     private val interactionListener: PostInteractionListener
-) : ListAdapter<Post, PostsAdapter.ViewHolder>(DiffCallback) {
+) : ListAdapter<Post, PostsAdapter.PostViewHolder>(DiffCallback) {
 
 
-    class ViewHolder(
+    class PostViewHolder(
         private val binding: PostBinding,
         listener: PostInteractionListener
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -48,6 +48,13 @@ internal class PostsAdapter(
             binding.shareIcon.setOnClickListener { listener.onShareClicked(post) }
             binding.videoBanner.setOnClickListener { listener.onPlayVideoClicked(post) }
             binding.options.setOnClickListener { popupMenu.show() }
+        }
+
+        init {
+            binding.postText.setOnClickListener { listener.onPostClicked(post.id) }
+            binding.authorName.setOnClickListener { listener.onPostClicked(post.id) }
+            binding.date.setOnClickListener { listener.onPostClicked(post.id) }
+            binding.avatar.setOnClickListener { listener.onPostClicked(post.id) }
         }
 
 
@@ -82,13 +89,13 @@ internal class PostsAdapter(
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = PostBinding.inflate(inflater, parent, false)
-        return ViewHolder(binding, interactionListener)
+        return PostViewHolder(binding, interactionListener)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
