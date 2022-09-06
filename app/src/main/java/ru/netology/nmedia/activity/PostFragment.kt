@@ -56,18 +56,28 @@ class PostFragment : Fragment() {
                 Bundle().apply { textArg = text }
             )
         }
-        
+
+        /* тоже самое, что выше, только через элвиса
+               viewModel.data.observe(viewLifecycleOwner) { list ->
+                   val post = list.find { it.id == arguments?.idArg }
+                   if (list.contains(post)){
+                       if (post != null) {
+                           viewHolder.bind(post)
+                       }
+                   } else {
+                       findNavController()
+                           .navigateUp()
+                   }
+               }
+              */
+
 
         viewModel.data.observe(viewLifecycleOwner) { list ->
-            val post = list.find { it.id == arguments?.idArg }
-            if (list.contains(post)){
-                if (post != null) {
-                    viewHolder.bind(post)
-                }
-            } else {
-                findNavController()
-                    .navigateUp()
+            val post = list.find { it.id == arguments?.idArg } ?: run {
+                findNavController().navigateUp()
+                return@observe
             }
+            viewHolder.bind(post)
         }
 
         return binding.root
