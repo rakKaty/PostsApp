@@ -57,7 +57,6 @@ internal class PostsAdapter(
             binding.avatar.setOnClickListener { listener.onPostClicked(post.id) }
         }
 
-
         fun bind(post: Post) {
             this.post = post
 
@@ -66,17 +65,11 @@ internal class PostsAdapter(
                 postText.text = post.content
                 date.text = post.published
                 likesIcon.isChecked = post.likedByMe
-                likesIcon.text = changeFormatOfNumberToText(getAmountOfLikes(post))
+                likesIcon.text = changeFormatOfNumberToText(post.likes)
                 shareIcon.text = changeFormatOfNumberToText(post.shares)
                 videoGroup.isVisible = post.video != null
             }
         }
-
-        private fun getAmountOfLikes(post: Post) =
-            if (post.likedByMe) {
-                post.likes + 1
-            } else post.likes
-
 
         private fun changeFormatOfNumberToText(number: Int): String = when {
             number < 1000 -> "$number"
@@ -85,9 +78,10 @@ internal class PostsAdapter(
             number in 1_000_000..9_999_999 -> "${number / 1_000_000}.${(number % 1_000_000) / 100}M"
             else -> "${number / 1_000_000}M"
         }
-
-
     }
+
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val inflater = LayoutInflater.from(parent.context)
